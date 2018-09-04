@@ -11,14 +11,12 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Main extends AppCompatActivity {
-    String date = new SimpleDateFormat ("yyyy/MM/dd").format(new Date());
+    String date = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +32,8 @@ public class Main extends AppCompatActivity {
         TextView day = findViewById(R.id.day);
         TextView hour = findViewById(R.id.hour);
         TextView minute = findViewById(R.id.minute);
-        today.setText(new SimpleDateFormat ("yyyy년MM월dd일HH시mm일").format(new Date()));
+        today.setText(new SimpleDateFormat ("yyyy/MM/dd hh:mm").format(new Date()));
         time.setVisibility(View.INVISIBLE);
-
 
         findViewById(R.id.rdoCalendar).setOnClickListener(
                 (View v) ->{
@@ -59,10 +56,11 @@ public class Main extends AppCompatActivity {
                     minute.setText(String.valueOf(time.getMinute()));
                 }
         );
+
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                date = String.valueOf(year+"/"+month+"/"+dayOfMonth);
+                date = year+"/"+month+"/"+dayOfMonth;
                 Log.d("date : ",date+"");
                 Log.d("hour : ",time.getHour()+"");
                 Log.d("min : ",time.getMinute()+"");
@@ -83,7 +81,7 @@ public class Main extends AppCompatActivity {
                 h.setText(hourOfDay+"");
                 m.setText(minute+"");
                 Log.d("hour : ", h.getText()+"");
-                Log.d("minute : ", h.getText()+"");
+                Log.d("minute : ", m.getText()+"");
             }
         });
     }
