@@ -47,6 +47,7 @@ public class Main extends AppCompatActivity {
                     time.setVisibility(View.VISIBLE);
                 }
         );
+
         findViewById(R.id.btnEnd).setOnClickListener(
                 (View v)-> {
                     year.setText(date.split("/")[0]);
