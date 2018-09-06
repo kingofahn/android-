@@ -22,6 +22,7 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         final Context ctx = Main.this;
+        class MyDate{String year,month,day;}
         TextView today = findViewById(R.id.today);
         CalendarView calender = findViewById(R.id.calender);
         RadioButton rdoCalendar = findViewById(R.id.rdoCalendar);
@@ -32,8 +33,9 @@ public class Main extends AppCompatActivity {
         TextView day = findViewById(R.id.day);
         TextView hour = findViewById(R.id.hour);
         TextView minute = findViewById(R.id.minute);
-        today.setText(new SimpleDateFormat ("yyyy/MM/dd hh:mm").format(new Date()));
+        today.setText(new SimpleDateFormat ("yyyy/MM/dd  hh:mm:ss").format(new Date()));
         time.setVisibility(View.INVISIBLE);
+        final MyDate m = new MyDate();
 
         findViewById(R.id.rdoCalendar).setOnClickListener(
                 (View v) ->{
@@ -50,11 +52,11 @@ public class Main extends AppCompatActivity {
 
         findViewById(R.id.btnEnd).setOnClickListener(
                 (View v)-> {
-                    year.setText(date.split("/")[0]);
-                    month.setText(date.split("/")[1]);
-                    day.setText(date.split("/")[2]);
-                    hour.setText(String.valueOf(time.getHour()));
-                    minute.setText(String.valueOf(time.getMinute()));
+                    year.setText(m.year);
+                    month.setText(m.month);
+                    day.setText(m.day);
+                    hour.setText(time.getHour()+"");
+                    minute.setText(time.getMinute()+"");
                 }
         );
 
@@ -62,6 +64,9 @@ public class Main extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 date = year+"/"+month+"/"+dayOfMonth;
+                m.year = year +"";
+                m.month = month+1 +"";
+                m.day = dayOfMonth +"";
                 Log.d("date : ",date+"");
                 Log.d("hour : ",time.getHour()+"");
                 Log.d("min : ",time.getMinute()+"");
